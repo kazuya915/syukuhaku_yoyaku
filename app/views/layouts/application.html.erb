@@ -14,5 +14,54 @@
   <%= yield %>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p> 
+    <header>
+
+    <div class = "header-container">
+
+      
+
+
+      <% if user_signed_in? %>
+        <div class = "accordion-container">
+
+          
+          <div class = "accordion-title">
+            
+          </div>
+          <div class = "accordion-content">
+            <div class = "accordion-list">
+            <%= link_to "アカウント編集　", edit_user_registration_path %>
+              <%= link_to "ルーム登録", new_room_path, class: "accordion_link" %>
+              <%= link_to "登録ルーム一覧", rooms_myrooms_path(current_user), class: "accordion_link" %>
+              <%= link_to "予約済みルーム一覧", rooms_myrooms_path(current_user), class: "accordion_link" %>
+              <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "accordion_link" %>
+            </div>
+          </div>
+        </div>
+      <% else %>
+        <%= link_to "ログイン", new_user_session_path, class: "header_form login" %>
+        <%= link_to "新規登録", new_user_registration_path, class: "header_form signup" %>
+      <% end %>
+    </div>
+
+    <% if flash[:notice] %>
+      <div class = "notification is-info">
+        <p class="notice"><%= notice %></p>
+      </div>
+    <% end %>
+    
+    <% if flash[:alert] %>
+      <div class = "notification is-danger">
+        <p class="alert"><%= alert %></p>
+      </div>
+    <% end %>
+
+  </header>
+
+  
+
+  <footer>
+    <p class = "footer-message">© 2023 POTEPAN.INC.</p>
+  </footer>
   </body>
 </html>

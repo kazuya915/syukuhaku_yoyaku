@@ -6,4 +6,7 @@ class User < ApplicationRecord
 
   validates :user_name, presence: true 
  
+  has_many :rooms
+  has_one_attached :prof_image
+  has_many :reservations, dependent: :destroy
 end

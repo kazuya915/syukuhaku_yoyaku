@@ -1,4 +1,4 @@
-<h2>ユーザー詳細</h2>
+<h2>アカウント詳細</h2>
 
 <table>
         <tr>
@@ -6,15 +6,20 @@
         </tr>
         <% if @user.id == current_user.id %>
         <tr>
-            <td><%= @user.email %></td>
+            <td>メールアドレス　<%= @user.email %></td>
+        </tr>
+        <tr>
+            <td>パスワード　********</td>
         </tr>
     <% end %>
     <tr>
         <td><%= @user_introduction %></td>
     </tr>
     <% if @user.id == current_user.id %>
-        <%= link_to "編集", edit_user_path(@user) %>
-        <%= link_to "ルーム登録", new_user_path %>
+        <%= link_to "アカウント編集　", edit_user_registration_path %>
+        <%= link_to "プロフィール詳細　", profile_path %>
+        <%= link_to "プロフィール編集　", profile_edit_path %>
+        <%= link_to "ルーム登録", new_room_path %>
     <% end %>
     
 </table>

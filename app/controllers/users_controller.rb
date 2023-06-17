@@ -3,19 +3,19 @@ class UsersController < ApplicationController
     @users = User.all
   end
   def show
-    @user = User.find(params[:id])
+    @user = current_user
   end
   def profile
-  
   end
   def edit
-  
   end
-
   def update
     @user = User.find(params[:id])
     @user.update(user_params)
-    redirect_to root_path
+    redirect_to profile_path
   end
-
+  private
+    def user_params
+      params.require(:user).permit(:user_name, :user_introduction, :price, :address, :room_image, :image , :prof_image)
+    end 
 end
