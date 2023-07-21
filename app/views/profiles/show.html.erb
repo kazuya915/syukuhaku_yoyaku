@@ -1,21 +1,23 @@
 <h2>プロフィール(詳細)</h2>
 
 <table>
-    <tr>
     
-        <td><%= @user.user_name %></td>
-    </tr>
 
     <% if @user.id == current_user.id %>
         <tr>
             <td><%= @user.profile_image %></td>
         </tr>
     <% end %>
-    <% if @user.prof_image.attached? %>
-        <%= image_tag @user.prof_image , size: "330x330" %>
-    <% end %>
+    <% if current_user.prof_image.attached? %>
+        <%= image_tag current_user.prof_image , size: "200x200" %>
+        <% else %>
+        <%= image_tag "default-image-prof.png" , size: "250x250" %>
+        <% end %>
+    <tr>    
+        <td>名前：<%= @user.user_name %></td>
+    </tr>
     <tr>
-            <td><%= @user.user_introduction %></td>
+            <td>一言：<%= @user.user_introduction %></td>
     </tr>
 
    
@@ -23,15 +25,8 @@
 </table>
 
 <% if @user.id == current_user.id %>
-<%= link_to "編集", profile_edit_path %>
-
+<%= link_to "プロフィール編集", profile_edit_path %>
 <% end %>
-<div><%=link_to "施設登録", :new_room%></div>
-<div><%=link_to "登録済み一覧", :new_room%></div>
-<%= link_to 'ログアウト', 
-  destroy_user_session_path,
-  class: 'dropdown-item',
-  method: :delete
-%>
+
 
 

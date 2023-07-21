@@ -1,19 +1,33 @@
 <div class = "container">
     <h2>ルーム詳細</h2>
     <div class = "room-show-container container">
+    <% if @reservation.errors.any? %>
+        <div id = "error_explanation">
+            <h2><%= pluralize(@reservation.errors.count, "つ") %>のエラーがあります。再度確認をお願いいたします。</h2>
+            <ul>
+                <% @reservation.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                <% end%>
+            </ul>
+        </div>
+    <% end %>
     <% if @room.image.attached? %>
-    <%= image_tag @room.image %>
+    <%= image_tag @room.image , size: "330x330"%>
+    <% else %>
+    <%= image_tag "default-image-room.png" , size: "250x250" %>
     <% end %>
         <div class = "room-show-info">
-            <div class = "border-around room_name-show">部屋名<br><%= @room.room_name %></div>
-            <div class = "border-around address-show">住所<br><%= @room.address %></div>
-            <div class = "border-around body-show">紹介文<br><%= @room.room_introduction %></div>
+            <div class = "border-around room_name-show">○部屋名<br><%= @room.room_name %></div>
+            <div class = "border-around address-show">○住所<br><%= @room.address %></div>
+            <div class = "border-around body-show">○紹介文<br><%= @room.room_introduction %></div>
+            <div class = "border-around body-show">○金額<br><%= @room.price %>（/日）</div>
             <div><%=link_to "戻る", :back %></div>
-            <div><%=link_to "編集", :edit_room%></div>
+            <div><%=link_to "編集", edit_room_path(@room)%></div>
+            <%= button_to "削除", room_path(@room), method: :delete, data: { confirm: "本当に削除しますか？" } %>
         </div>
     </div>
 
-    <%= form_with model: [@room_info, @reservation],method: :post, url:confirm_room_reservations_path  do |f| %>
+    <%= form_with model: [@room_info, @reservation],method: :post, url:confirm_room_reservations_path(room_id: @room.id)  do |f| %>
     <table>
         <tr>
             <th><%= f.label :person ,"人数" %></th>

@@ -4,13 +4,17 @@ Rails.application.routes.draw do
     collection do
       get "myrooms"
     end
+    collection do
+      get 'search'
+    end
 
-    resources :reservations, only: [:index, :new, :create, :show] do
+
+    resources :reservations, only: [:index, :new, :create, :show, :destroy] do
 
       collection do
         post :confirm
       end
-
+      
     end
   end
   get 'reservations/create'
@@ -18,7 +22,7 @@ Rails.application.routes.draw do
 
   devise_for :users
   get 'rooms/myrooms'
-  root to: "home#index"
+  root to: "rooms#index"
   resources :users
 
 
@@ -27,11 +31,11 @@ Rails.application.routes.draw do
   get 'profile', to: 'profiles#show'
 
 
-  resources :reservations do
-    collection do
-      post :confirm
-    end
-  end
+  # resources :reservations do
+  #   collection do
+  #     post :confirm
+  #   end
+  # end
   
   # resources :rooms do
   #   resources :reservations

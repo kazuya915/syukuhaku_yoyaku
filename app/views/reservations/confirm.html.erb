@@ -7,12 +7,12 @@
 
         <div class = "confirm_tr">
             <div>チェックイン日</div>
-            <div class = "confirm_tag"><%= @reservation.start_date %></div>
+            <div class = "confirm_tag"><%= @reservation.start_date.strftime("%Y/%m/%d") %></div>
         </div>
 
         <div class = "confirm_tr">
             <div>チェックアウト日</div>
-            <div class = "confirm_tag"><%= @reservation.end_date %></div>
+            <div class = "confirm_tag"><%= @reservation.end_date.strftime("%Y/%m/%d") %></div>
         </div>
 
         <div class = "confirm_tr">
@@ -29,7 +29,7 @@
 
         <div class = "confirm_tr">
             <div>支払い金額</div>
-            <div class = "confirm_tag"><%= @reservation.total_price %></div>
+            <div class = "confirm_tag"><%= @reservation.total_price %>円</div>
         </div>
 
     </div>
@@ -40,6 +40,7 @@
             <%= f.hidden_field :end_date %>
             <%= f.hidden_field :person %>
             <%= f.submit "確定する" %>
+            <%=link_to "予約をやり直す", :back %>
         </div>
     <% end %>
 </div>

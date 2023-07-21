@@ -1,9 +1,10 @@
 <h2>アカウント詳細</h2>
 
-<table>
+<table class="p-3 m-3 ">
         <tr>
-            <td><%= @user.user_name %></td>
+            <td>名前　<%= @user.user_name %></td>
         </tr>
+
         <% if @user.id == current_user.id %>
         <tr>
             <td>メールアドレス　<%= @user.email %></td>
@@ -11,21 +12,8 @@
         <tr>
             <td>パスワード　********</td>
         </tr>
-    <% end %>
-    <tr>
-        <td><%= @user_introduction %></td>
-    </tr>
-    <% if @user.id == current_user.id %>
-        <%= link_to "アカウント編集　", edit_user_registration_path %>
-        <%= link_to "プロフィール詳細　", profile_path %>
-        <%= link_to "プロフィール編集　", profile_edit_path %>
-        <%= link_to "ルーム登録", new_room_path %>
-    <% end %>
+        <% end %>
+    
     
 </table>
-
-<%= link_to 'ログアウト', 
-  destroy_user_session_path,
-  class: 'dropdown-item',
-  method: :delete
-%>
+<div><%= link_to "アカウント編集　", edit_user_registration_path %></div>

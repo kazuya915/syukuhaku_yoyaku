@@ -14,9 +14,12 @@ class ReservationsController < ApplicationController
     @reservation.room_id = @room_info.id
 
     if @reservation.valid?
+      # binding.pry
       render :confirm
     else
-      render :new
+      # binding.pry
+      @room = @room_info
+      render 'rooms/show'
     end
 
   end
@@ -32,10 +35,17 @@ class ReservationsController < ApplicationController
     @reservation.user_id = current_user.id
 
     if @reservation.save
-      redirect_to confirm
+      redirect_to room_reservations_path
     else
       
     end
+  end
+
+  def destroy
+    @reservation = Room.find(params[:id])
+    @reservation.destroy
+    flash[:notice] = "当該施設を削除しました"
+    redirect_to room_reservations_path
   end
 
 
