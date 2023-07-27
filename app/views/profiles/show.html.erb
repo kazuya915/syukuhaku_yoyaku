@@ -1,0 +1,32 @@
+<h2>プロフィール(詳細)</h2>
+
+<table>
+    
+
+    <% if @user.id == current_user.id %>
+        <tr>
+            <td><%= @user.profile_image %></td>
+        </tr>
+    <% end %>
+    <% if current_user.prof_image.attached? %>
+        <%= image_tag current_user.prof_image , size: "200x200" %>
+        <% else %>
+        <%= image_tag "default-image-prof.png" , size: "250x250" %>
+        <% end %>
+    <tr>    
+        <td>名前：<%= @user.user_name %></td>
+    </tr>
+    <tr>
+            <td>一言：<%= @user.user_introduction %></td>
+    </tr>
+
+   
+    
+</table>
+
+<% if @user.id == current_user.id %>
+<%= link_to "プロフィール編集", profile_edit_path %>
+<% end %>
+
+
+

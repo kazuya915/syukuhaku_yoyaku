@@ -1,0 +1,14 @@
+<h1>Home#index</h1>
+
+<header>ルートです</header>
+<%= link_to 'ログイン', 
+user_session_path
+%>
+<%= link_to 'ログアウト', 
+  destroy_user_session_path,
+  class: 'dropdown-item',
+  method: :delete
+%>
+
+
+# 後でログインの有無でヘッダー切り替え設定したのちshowルート再チャレンジ

@@ -5,12 +5,73 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
+  
   <body>
-    <%= yield %>
-  </body>
+  
+  <nav class="d-flex justify-content-between p-3 mb-2 bg-dark text-white">
+    <div class="p-3"><h1><%= link_to 'POTEPAN SAHRE', rooms_path %></h1></div>
+    <% if user_signed_in? %>
+      <div class="accordion d-flex justify-content-between" id="accordionExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button type="button" class="accordion-button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            
+            <% if current_user.prof_image.attached? %>
+            <%= image_tag current_user.prof_image , size: "50x50" %>
+            <% else %>
+            <%= image_tag "default-image-prof.png" , size: "50x50" %>
+            <% end %>
+            　<%= current_user.user_name %>
+            </button>
+          </h2>
+        <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <%= link_to "ルーム登録", new_room_path, class: "accordion_link" %>
+          </div>
+          <div class="accordion-body">
+            
+            <div><%= link_to "アカウント詳細　", user_path(current_user) %></div>
+            
+            <div><%= link_to "プロフィール詳細", profile_path %></div>
+            
+            <div><%= link_to "登録ルーム一覧", rooms_myrooms_path(current_user), class: "accordion_link" %></div>
+            <div><%= link_to "予約済みルーム一覧", room_reservations_path(current_user), class: "accordion_link" %></div>
+            <div></div>
+          </div>
+          <div class="accordion-body">
+          <%= button_to "ログアウト", destroy_user_session_path, method: :delete%>
+          </div>
+        </div>
+      </div>
+    <% else %>
+        <%= link_to "ログイン", new_user_session_path, class: "header_form login" %>
+        <%= link_to "新規登録", new_user_registration_path, class: "header_form signup" %>
+    <% end %>
+  </nav>
+  
+  <% if flash[:notice] %>
+      <div class = "notification is-info">
+        <p class="notice"><%= notice %></p>
+      </div>
+    <% end %>
+    
+    <% if flash[:alert] %>
+      <div class = "notification is-danger">
+        <p class="alert"><%= alert %></p>
+      </div>
+    <% end %>
+  <%= yield %>
+    
+ 
+
+  
+
+  <footer class="p-3 mb-2 bg-dark text-white">
+    <p class = "footer-message">© 2023 POTEPAN.INC.</p>
+  </footer>
+
+</body>
 </html>

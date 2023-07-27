@@ -1,0 +1,36 @@
+<div class = 'p-4'>
+<%= search_form_for @q, url: search_rooms_path do |f| %>
+  <%= f.label :_cont, 'キーワード検索:' %>
+  <%= f.search_field :room_name_or_room_introduction_cont , placeholder: "キーワード名を入力"%>
+  <%= f.search_field :address_cont , placeholder: "エリア名を入力" %>
+  <%= f.submit '検索' %>
+<% end %>
+</div>
+<h1 class = 'p-3'>検索結果</h1>
+<h2 class = 'p-2'><%= "#{@results.count}件" %></h2>
+<table>
+  <thead>
+    <tr>
+      <th class = 'p-2'>施設名</th>
+      <th>住所</th>
+      <th>料金</th>
+      <th>お部屋の詳細</th>
+      <th></th>
+      <th colspan="3"></th>
+    </tr>
+    </thead>
+
+  <tbody>
+    <% @results.each do |room| %>
+      <tr>
+        <td class = 'p-2'><%= link_to "#{room.room_name}", room %></td>
+        <td><%= room.address %></td>
+        <td class = 'p-2'><%= room.price %></td>
+        <td><%= room.room_introduction %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+
+<div class = 'p-3'><%= link_to '検索に戻る', rooms_path %></div>

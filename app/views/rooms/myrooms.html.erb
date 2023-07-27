@@ -1,0 +1,32 @@
+<h2 class = 'p-3'>登録ルーム一覧</h2>
+
+<table class="table">
+<thead>
+    <tr>
+        <th scope="col">画像</th>
+        <th scope="col">部屋名</th> 
+        <th scope="col">紹介文</th> 
+        <th scope="col">料金</th> 
+        <th scope="col">施設作成日</th> 
+    </tr>
+</thead>
+<tbody>
+    <%@myrooms.each do |myroom| %>
+    <tr>
+        <td scope="row">
+            <% if myroom.image.attached? %>
+            <%= image_tag myroom.image , size: "100x100"%>
+            <% else %>
+            <%= image_tag "default-image-room.png" , size: "100x100" %>
+            <% end %>
+        </td>
+        <td><%= link_to "#{myroom.room_name}", room_path(myroom) %></td>
+        <td><%= myroom.room_introduction %></td>
+        <td><%= myroom.price %>円(/日)</td>
+        <td><%= myroom.created_at.strftime("%Y/%m/%d") %></td>
+        
+        </tr>
+    <% end %>
+</tbody>
+</table>
+

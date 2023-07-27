@@ -1,0 +1,37 @@
+<div class="text-center p-5 m-5">
+  <h1 class = 'p-2'>【検索】</h1>
+  <%= search_form_for @q, url: search_rooms_path do |f| %>
+    <%= f.label :_cont, 'キーワード検索:' %>
+    <%= f.search_field :room_name_or_room_introduction_cont , placeholder: "キーワード名を入力"%>
+    <%= f.search_field :address_cont , placeholder: "エリア名を入力" %>
+    <br>
+    <br>
+    <%= f.submit '検索' %>
+  <% end %>
+  <br>
+</div>
+
+<div class = "contents">
+    <h3 class="p-3 mb-2 bg-secondary text-white">●おすすめエリア</h3>
+        <div>
+        <%= link_to  controller: "rooms", action: "search", q: { address_cont: '京都府' } do %>
+                <div>--------京都--------<%= image_tag 'img_kyoto.jpeg', size: "300x300"  %></div>
+            <% end %>
+        </div>   
+        <div>
+        <%= link_to  controller: "rooms", action: "search", q: { address_cont: '東京' } do %>
+                <div><%= image_tag 'img_tokyo.jpeg', size: "300x300" %>--------東京--------</div>
+                <div class = "content_name"></div>
+            <% end %>
+        </div>   
+        <%= link_to  controller: "rooms", action: "search", q: { address_cont: '大阪' } do %>
+                <div>--------大阪--------<%= image_tag 'img_osaka.jpeg', size: "300x300" %></div>
+            <% end %>
+        </div>   
+        <%= link_to  controller: "rooms", action: "search", q: { address_cont: '札幌' } do %>
+                <div><%= image_tag 'img_sapporo.jpeg', size: "300x300" %>--------札幌--------</div>
+                <div class = "content_name"></div>
+            <% end %>
+        </div>   
+    </div>
+</div>
