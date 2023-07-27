@@ -4,7 +4,7 @@ class Room < ApplicationRecord
     has_many :reservations, dependent: :destroy
     validates :room_name, presence: true
     validates :room_introduction, presence: true
-    validates :price, presence: true
+    validates :price, presence: true , numericality: {greater_than: 0}
     validates :address, presence: true
     def self.ransackable_attributes(auth_object = nil)
         ["address", "created_at", "id", "price", "room_image", "room_introduction", "room_name", "updated_at", "user_id"]

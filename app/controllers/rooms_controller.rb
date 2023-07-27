@@ -44,6 +44,7 @@ class RoomsController < ApplicationController
 
   def search
     @results = @q.result
+    
   end
   def destroy
     @room = Room.find(params[:id])
